@@ -61,7 +61,12 @@ open class FaveButton: UIButton {
     
     fileprivate(set) var sparkGroupCount: Int = 7
     
-    fileprivate var faveIconImage:UIImage?
+    var faveIconImage:UIImage? {
+        didSet {
+            guard faveIconImage != nil else { return }
+            applyInit()
+        }
+    }
     fileprivate var faveIcon: FaveIcon!
     fileprivate var animationsEnabled = true
     
@@ -82,8 +87,6 @@ open class FaveButton: UIButton {
             fatalError("missing image for normal state")
         }
         faveIconImage = icon
-        
-        applyInit()
     }
     
     override public init(frame: CGRect) {
@@ -115,13 +118,13 @@ open class FaveButton: UIButton {
 
 // MARK: create
 extension FaveButton{
-    fileprivate func applyInit(){
+    fileprivate func applyInit() {
         
         if nil == faveIconImage{
             faveIconImage = image(for: UIControlState())
         }
         
-        guard let faveIconImage = faveIconImage else{
+        guard let faveIconImage = faveIconImage else {
             fatalError("please provide an image for normal state.")
         }
         
@@ -132,12 +135,13 @@ extension FaveButton{
         
         faveIcon  = createFaveIcon(faveIconImage)
         
+        removeTarget(self, action: nil, for: UIControlEvents.allEvents)
         addActions()
     }
     
     
     fileprivate func createFaveIcon(_ faveIconImage: UIImage) -> FaveIcon{
-        return FaveIcon.createFaveIcon(self, icon: faveIconImage,color: normalColor)
+        return FaveIcon.createFaveIcon(self, icon: faveIconImage, color: normalColor)
     }
     
     

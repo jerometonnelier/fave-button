@@ -24,13 +24,16 @@ class ViewController: UIViewController, FaveButtonDelegate{
     @IBOutlet var heartButton: FaveButton?
     @IBOutlet var loveButton : FaveButton?
     
+    @IBOutlet weak var favButton: FaveButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.heartButton?.setSelected(selected: true, animated: false)
-        
-        self.loveButton?.setSelected(selected: true, animated: false)
-        self.loveButton?.setSelected(selected: false, animated: false)
+        favButton.selectedColor = color(0x93C01F)
+        favButton.dotFirstColor = color(0xF39201)
+        favButton.dotSecondColor = color(0x93C01F)
+        favButton.circleFromColor = color(0xF39201)
+        favButton.circleToColor = color(0x93C01F)
+        favButton.normalColor = .darkGray
     }
     
     let colors = [
@@ -45,7 +48,7 @@ class ViewController: UIViewController, FaveButtonDelegate{
     }
     
     func faveButtonDotColors(_ faveButton: FaveButton) -> [DotColors]?{
-        if( faveButton === heartButton || faveButton === loveButton){
+        if( faveButton === favButton || faveButton === loveButton){
             return colors
         }
         return nil

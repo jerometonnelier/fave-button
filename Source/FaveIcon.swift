@@ -52,7 +52,7 @@ class FaveIcon: UIView {
 extension FaveIcon{
     
     class func createFaveIcon(_ onView: UIView, icon: UIImage, color: UIColor) -> FaveIcon{
-        let faveIcon = Init(FaveIcon(region:onView.bounds, icon: icon, color: color)){
+        let faveIcon = Init(FaveIcon(region:onView.bounds, icon: icon, color: color)) {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.backgroundColor                           = .clear
         }
@@ -70,13 +70,13 @@ extension FaveIcon{
         let shapeOrigin = CGPoint(x: -contentRegion.center.x, y: -contentRegion.center.y)
         
         
-        iconMask = Init(CALayer()){
+        iconMask = Init(CALayer()) {
             $0.contents      = iconImage.cgImage
             $0.contentsScale = UIScreen.main.scale
             $0.bounds        = maskRegion
         }
         
-        iconLayer = Init(CAShapeLayer()){
+        iconLayer = Init(CAShapeLayer()) {
             $0.fillColor = iconColor.cgColor
             $0.path      = UIBezierPath(rect: CGRect(origin: shapeOrigin, size: contentRegion.size)).cgPath
             $0.mask      = iconMask
