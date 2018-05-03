@@ -61,7 +61,7 @@ open class FaveButton: UIButton {
     
     fileprivate(set) var sparkGroupCount: Int = 7
     
-    open var faveIconImage:UIImage? {
+    public var faveIconImage:UIImage? {
         didSet {
             guard faveIconImage != nil else { return }
             applyInit()
